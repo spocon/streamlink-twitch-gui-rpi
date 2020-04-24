@@ -1,31 +1,14 @@
-import {
-	module,
-	test
-} from "qunit";
+import { module, test } from "qunit";
+
 import spawnInjector from "inject-loader!utils/node/child_process/spawn";
 
 
-let originalEnv;
-
-
-module( "utils/node/child_process/spawn", {
-	beforeEach() {
-		originalEnv = process.env;
-	},
-
-	afterEach() {
-		process.env = originalEnv;
-	}
-});
+module( "utils/node/child_process/spawn" );
 
 
 test( "Merges the process.env object", assert => {
 
 	assert.expect( 11 );
-
-	process.env = {
-		foo: "foo"
-	};
 
 	let callback;
 	let spawncmd;
@@ -33,7 +16,12 @@ test( "Merges the process.env object", assert => {
 	let spawnoptions;
 
 	const spawn = spawnInjector({
-		child_process: {
+		"nwjs/process": {
+			env: {
+				foo: "foo"
+			}
+		},
+		"child_process": {
 			spawn( ...args ) {
 				callback( ...args );
 			}

@@ -1,0 +1,37 @@
+<fieldset>
+{{#settings-row
+	(t "settings.languages.filter.title")
+	(t "settings.languages.filter.description")
+	notes=(t "settings.languages.filter.notes")
+	icon="fa-filter"
+}}
+	{{#radio-buttons
+		value=model.streams.filter_languages
+		content=contentStreamsFilterLanguages
+		as |item|
+	}}
+		<div class="input-btn-with-description">
+			{{item.button label=(t (concat "settings.languages.filter.values." item.label ".text"))}}
+			<div class="description">{{t (concat "settings.languages.filter.values." item.label ".description")}}</div>
+		</div>
+	{{/radio-buttons}}
+{{/settings-row}}
+
+{{#settings-row
+	(t "settings.languages.languages.title")
+	(t "settings.languages.languages.description")
+	icon="fa-language"
+	notes=(t "settings.languages.languages.notes")
+}}
+	<ul class="list-unstyled filter-lang">
+		{{#each languages as |id|}}
+			<li>
+				{{#check-box checked=(mut (get model.streams.languages id))}}
+					{{flag-icon lang=id withTitle=false withCursor=false}} {{t (concat "languages." id)}}<span class="lang-code">({{id}})</span>
+				{{/check-box}}
+			</li>
+		{{/each}}
+	</ul>
+	<div><a href="#" {{action "checkLanguages" true}}>{{t "settings.languages.languages.check-all"}}</a> / <a href="#" {{action "checkLanguages" false}}>{{t "settings.languages.languages.uncheck-all"}}</a></div>
+{{/settings-row}}
+</fieldset>

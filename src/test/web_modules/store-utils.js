@@ -1,5 +1,5 @@
 import DS from "ember-data";
-import "initializers/store";
+import "init/initializers/store";
 
 
 export function setupStore( owner, options ) {
@@ -34,6 +34,9 @@ export function setupStore( owner, options ) {
 	registry.register( "transform:string", DS.StringTransform );
 
 	registry.register( "service:store", DS.Store.extend({ adapter }) );
+	registry.injection( "controller", "store", "service:store" );
+	registry.injection( "route", "store", "service:store" );
+	registry.injection( "data-adapter", "store", "service:store" );
 
 	env.restSerializer = container.lookup( "serializer:-rest" );
 	env.store = container.lookup( "service:store" );

@@ -1,7 +1,7 @@
 {
 	"display-name": "Streamlink Twitch GUI",
 	"app-identifier": "streamlink-twitch-gui",
-	"nwjs-version": "0.21.6",
+	"nwjs-version": "0.42.3",
 	"urls": {
 		"homepage": "https://github.com/streamlink/streamlink-twitch-gui",
 		"release": "https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v{version}",
@@ -10,5 +10,24 @@
 		"bugs": "https://github.com/streamlink/streamlink-twitch-gui/issues",
 		"chat": "https://gitter.im/streamlink/streamlink-twitch-gui",
 		"contributors": "https://github.com/streamlink/streamlink-twitch-gui/graphs/contributors"
-	}
+	},
+	"donation": [
+		{
+			"text": "GitHub Sponsors",
+			"url": "https://github.com/users/bastimeyer/sponsorship"
+		},
+		{
+			"text": "Paypal",
+			"url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YUCGRLVALHS8C&item_name=Streamlink%20Twitch%20GUI"
+		},
+		{
+			"text": "OpenCollective (Streamlink)",
+			"url": "https://opencollective.com/streamlink"
+		},
+		{
+			"text": "Bitcoin",
+			"url": "https://blockchain.info/qr?data=1EZg8eBz4RdPb8pEzYD9JEzr9Fyitzj8j8",
+			"coinaddress": "1EZg8eBz4RdPb8pEzYD9JEzr9Fyitzj8j8"
+		}
+	]
 }

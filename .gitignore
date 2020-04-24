@@ -19,7 +19,6 @@ nbproject
 
 # dependencies
 /node_modules/
-/bower_components/
 
 # builds
 /build/cache/
@@ -27,3 +26,6 @@ nbproject
 /build/tmp/
 /build/travis/data/
 /dist/
+*.orig
+Vagrant/.vagrant/machines/twitch-gui/virtualbox/action_set_name
+Vagrant/.vagrant/

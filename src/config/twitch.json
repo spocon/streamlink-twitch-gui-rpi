@@ -1,15 +1,17 @@
 {
 	"stream-url": "twitch.tv/{channel}",
-	"chat-url": "https://www.twitch.tv/{channel}/chat",
-	"emotes-url": "https://twitchemotes.com/channel/{channel}",
+	"chat-url": {
+		"default": "https://www.twitch.tv/popout/{channel}/chat",
+		"popout": "https://www.twitch.tv/popout/{channel}/chat",
+		"embed": "https://www.twitch.tv/embed/{channel}/chat"
+	},
+	"emotes-url": "https://twitchemotes.com/channels/{id}",
 	"subscription": {
-		"create-url": "https://www.twitch.tv/{channel}/subscribe",
-		"edit-url": "https://www.twitch.tv/products/{channel}/ticket/edit",
-		"cancel-url": "https://www.twitch.tv/products/{channel}/ticket/edit?cancel_and_refund=true"
+		"create-url": "https://www.twitch.tv/{channel}/subscribe"
 	},
 	"oauth": {
 		"server-port": 65432,
-		"base-uri": "https://api.twitch.tv/kraken/oauth2/authorize?response_type=token&client_id={client-id}&redirect_uri={redirect-uri}&scope={scope}&force_verify=true",
+		"base-uri": "https://id.twitch.tv/oauth2/authorize?response_type=token&client_id={client-id}&redirect_uri={redirect-uri}&scope={scope}&force_verify=true",
 		"client-id": "phiay4sq36lfv9zu7cbqwz2ndnesfd8",
 		"redirect-uri": "http://localhost:{server-port}/redirect",
 		"scope": [

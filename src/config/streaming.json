@@ -1,0 +1,84 @@
+{
+	"default-provider": "streamlink",
+	"download-url": {
+		"streamlink": "https://streamlink.github.io/install.html"
+	},
+	"docs-url": {
+		"streamlink": "https://streamlink.github.io/cli.html#cmdoption{item}"
+	},
+	"validation": {
+		"timeout": 10000,
+		"providers": {
+			"streamlink": {
+				"version": "1.3.1",
+				"regexp": "^(?:python\\d*-)?streamlink(?:\\.exe|-script\\.pyw?)? (\\d+\\.\\d+\\.\\d+)(?:$|[\\s+-].*)"
+			}
+		}
+	},
+	"providers": {
+		"streamlink": {
+			"type": "streamlink",
+			"flavor": "default",
+			"name": "Streamlink",
+			"label": "Streamlink",
+			"python": ">=2.6 <3 || >=3.3",
+			"exec": {
+				"win32": "pythonw.exe",
+				"darwin": "python",
+				"linux": "python"
+			},
+			"fallback": {
+				"win32": [
+					"%PROGRAMFILES%\\Streamlink\\Python",
+					"%PROGRAMFILES(X86)%\\Streamlink\\Python"
+				],
+				"darwin": [
+					"/usr/bin",
+					"/usr/local/bin",
+					"/Library/Frameworks/Python.framework/Versions/Current/bin"
+				],
+				"linux": [
+					"/usr/bin",
+					"/usr/local/bin"
+				]
+			},
+			"pythonscript": {
+				"win32": "streamlink-script.py",
+				"darwin": "streamlink",
+				"linux": "streamlink"
+			},
+			"pythonscriptfallback": {
+				"win32": [
+					"%PROGRAMFILES%\\Streamlink\\bin",
+					"%PROGRAMFILES(X86)%\\Streamlink\\bin"
+				],
+				"darwin": [
+					"/usr/bin",
+					"/usr/local/bin",
+					"/Library/Frameworks/Python.framework/Versions/Current/bin"
+				],
+				"linux": [
+					"/usr/bin",
+					"/usr/local/bin"
+				]
+			}
+		},
+		"streamlinkw": {
+			"type": "streamlink",
+			"flavor": "windows",
+			"name": "Streamlink",
+			"label": "Streamlink (Windows)",
+			"exec": {
+				"win32": "streamlinkw.exe",
+				"darwin": false,
+				"linux": false
+			},
+			"fallback": {
+				"win32": [
+					"%PROGRAMFILES%\\Streamlink\\bin",
+					"%PROGRAMFILES(X86)%\\Streamlink\\bin"
+				]
+			}
+		}
+	}
+}

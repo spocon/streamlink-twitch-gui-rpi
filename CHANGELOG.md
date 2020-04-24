@@ -1,6 +1,267 @@
 Changelog - Streamlink Twitch GUI
 ===
 
+## [v1.9.1](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.9.1) (2020-01-29)
+
+- :warning: Set Streamlink's version requirement to `1.3.1`.  
+  Upgrade to the latest Streamlink version [here](https://streamlink.github.io/install.html) or see the [wiki](https://github.com/streamlink/streamlink-twitch-gui/wiki).
+- Added workaround for followed streams not being sorted by viewer count. #699  
+  Apparently, the API changes have finally been fixed again by Twitch. The workaround will be kept though.
+- Added `ctrlKey` modifier to most hotkeys and changed share-channel hotkey. #696  
+  Customizable hotkeys will be added in one of the next releases.
+- Fixed hotkeys triggering when modifiers were not matching exactly. #696
+- Fixed MPV player preset related to recent breaking changes of MPV's parameter parsing.
+- Fixed some localization issues. #690, #691
+- Changed Twitch OAuth URL to correct new URL when signing in.
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.9.0...v1.9.1)
+
+
+## [v1.9.0](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.9.0) (2019-11-23)
+
+This release mainly focuses on fixing the recent issues related to the [breaking changes of Twitch's API](https://github.com/streamlink/streamlink/issues/2680). Since the situation wasn't 100% clear for the first couple of days, we had to wait until we were able to make a proper decision.
+
+For Streamlink Twitch GUI, this means that a couple of features had to be removed, unfortunately. If Twitch decides to make the API endpoints available to third party app developers which were required by the removed features, I will be more than happy to re-implement them.
+
+Support for Livestreamer has also finally been removed. If you were still using Livestreamer, you will have to [install and use Streamlink now](https://github.com/streamlink/streamlink-twitch-gui/wiki/Installation).
+
+- :warning: Set Streamlink's version requirement to `1.3.0`.  
+  Upgrade to the latest Streamlink version [here](https://streamlink.github.io/install.html) or see the [wiki](https://github.com/streamlink/streamlink-twitch-gui/wiki).
+- Removed everything that was using Twitch's old private API. #684
+  - Removed channel panels.
+  - Removed subscriptions list.
+  - Removed hosted streams list.
+  - Removed followed games list and (un)follow game button.
+- Removed deprecated Livestreamer support. #667
+- Removed login sharing with Streamlink. #682
+- Added back automatic theme selection. #666
+- Added more fallback paths for VLC and MPV on macOS. #664
+- Added media title parameter to MPV player preset. #683
+- Upgraded NW.js to 0.42.3 (Chromium 78.0.3904.97 / NodeJS 13.1.0).
+- Updated donation links and texts.
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.8.1...v1.9.0)
+
+
+## [v1.8.1](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.8.1) (2019-08-09)
+
+This is a critical bugfix release for the crashing Windows builds since v1.8.0 which downgrades the used NW.js version. See #656 for more information.
+
+If you've already upgraded to v1.8.0, regardless the OS, you may see an NW.js downgrade error message (once) in the future. This can be ignored. Deleting the user-data-dir, which will wipe your settings and login, before upgrading to v1.8.1 and downgrading NW.js is also an option.
+
+If you're coming from v1.7.1, you can ignore all of this.
+
+Once again, I apologize for the inconveniences.
+
+Please see the full changelog of the [v1.8.0](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.8.0) release!
+
+- Downgraded NW.js to 0.39.3 (Chromium 75.0.3770.142 / Node 12.6.0).
+- Reverted automatic theme selection (dependent on Chromium 76).
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.8.0...v1.8.1)
+
+
+## [v1.8.0](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.8.0) (2019-08-08)
+
+- Removed "Communities" (feature was already removed by Twitch). #652
+- Added automatic light/dark theme selection. Needs to be supported by the OS.
+- Added translations for locale "fr". #642
+- Fixed white page being shown while app is loading.
+- Fixed errors not being logged correctly.
+- Fixed broken stream popup when re-launching streams. #637
+- Fixed shrinking stream thumbnails when pressing TAB. #645
+- Fixed channel settings not loading when re-visiting route. #646
+- Fixed hotkeys while having an input element focused. #647
+- Fixed undefined channel name in the edit/cancel subscription URL. #651
+- Upgraded NW.js to 0.40.0 (Chromium 76.0.3809.87 / Node 12.6.0).
+- Upgraded lots of dependencies and removed jQuery.
+- Upgraded to EmberData 3.9.
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.7.1...v1.8.0)
+
+
+## [v1.7.1](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.7.1) (2019-04-17)
+
+- Fixed login issues on Windows. #628
+- Fixed pin to taskbar issues on Windows. #629
+- Fixed `--goto` parameter. #630
+- Fixed minimize to tray. #632
+- Fixed desktop notification issues on Windows. #634
+- Fixed spacebar hotkey on form components.
+- Made hotkeys aware of keyboard layouts (was changed in v1.7.0).
+- Upgraded NW.js to 0.37.4. #628, #629, #634
+
+Please also see the changelog of the [`v1.7.0`](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.7.0) release, if you're upgrading from an older version.
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.7.0...v1.7.1)
+
+
+## [v1.7.0](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.7.0) (2019-04-05)
+
+* :warning: Set Streamlink's version requirement to `1.1.0`. #618  
+  Upgrade to the latest Streamlink version [here](https://streamlink.github.io/install.html) or see the [wiki](https://github.com/streamlink/streamlink-twitch-gui/wiki).
+* :warning: Added new streaming provider `Streamlink (Windows)`. #618  
+  This is the new default streaming provider on Windows and is required when using a Streamlink version newer than `0.14.2`.  
+  Previous users of Streamlink Twitch GUI on Windows will have to switch manually from `Streamlink` to `Streamlink (Windows)` or will have to apply the workaround mentioned in #618.
+* :warning: Removed bash wrapper launch script from Linux builds.  
+  Please remove and re-add menu shortcuts once (see included scripts).
+
+
+- Added an option for skipping embedded stream advertisements. #621  
+  See the [wiki](https://github.com/streamlink/streamlink-twitch-gui/wiki) for more information about this.
+- Added mouse navigation buttons. #492
+- Added architecture info to about page. #606
+- Removed featured communities (only shows all communities now).
+- Fixed not being able to watch unpartnered channels in specific qualities. #481
+- Fixed not being able to save custom channel settings. #595
+- Fixed VLC config on macOS. #600
+- Fixed search bar input validation issue. #610
+- Fixed NW.js runtime parameter parsing. #613
+- Fixed undecoded HTML entities in desktop notifications. #626
+- Fixed subscription date and month counter. #627
+- Fixed refresh route logic.
+- Fixed race condition in desktop notification icon downloader.
+- Fixed stream data polling issue in StreamingService.
+- Fixed time related translations in "de" locale.
+- Upgraded to NW.js 0.37.2 (Chromium 73.0.3683.86 / Node 11.13.0). #603
+- Upgraded to Ember 3.7 and EmberData 3.3.
+- Various other dependency upgrades.
+- Lots of internal changes and improvements.
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.6.0...v1.7.0)
+
+
+## [v1.6.0](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.6.0) (2018-08-01)
+
+- Changed default chat URL for web browser chat applications. #536
+- Changed log and cache directories on macOS and Linux. See 5f66c1ea.
+- Added translations for locale "zh-tw". #567
+- Added translations for locale "de". #590
+- Added more fallback paths to the Chatty preset.
+- Added support for choosing between different chat URLs.
+- Added more debug logging to the ChatService.
+- Fixed logic for resolving the python executable on macOS and Linux. #589
+- Fixed game menu losing game filter after scrolling. #575
+- Fixed stream popup also being auto-closed on error. #560
+- Fixed close button in watching list not removing streams. #467
+- Fixed Vodcast detection (Twitch API change).
+- Fixed Streamlink output regex for Streamlink >=0.13.0 <0.14.0
+- Fixed startup animation being too early on slower systems.
+- Fixed typos in localization keys of the "en" locale. #557
+- Fixed race condition when downloading notification icons.
+- Set Noto Sans as additional fallback system font (for CJK texts).
+- Upgraded to Webpack 4.
+- Implemented custom Ember module unification loader for Webpack.
+- Lots of internal changes and improvements.
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.5.0...v1.6.0)
+
+
+## [v1.5.0](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.5.0) (2018-04-02)
+
+- Upgraded from Ember 2 to Ember 3. #519  
+  Improves loading and rendering times.
+- Implemented i18n support. #529  
+  Translations can be submitted now.
+- Fixed opacity of stream preview images. #534
+- Fixed bug resulting in blank pages. #517
+- Fixed follow game buttons (Twitch API changes). #549
+- Fixed streaming provider exit code issues.
+- Fixed streaming provider validation issues. #524
+- Added support for future Streamlink validation changes.
+- Fixed copy channel URL context menu on channel pages. #546
+- Changed chat URL for all web browser based chat providers. #536
+- Removed Bower build dependency. #519
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.4.1...v1.5.0)
+
+
+## [v1.4.1](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.4.1) (2017-11-19)
+
+This is a patch of today's [`v1.4.0`](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.4.0) release with fixes to the broken macOS archive.  
+The changelog has been copied here.
+
+- Changed default Streamlink (and Livestreamer) parameters.  
+  Please see the "Player input" option in the "Streaming" settings menu and make sure that your player supports the selected method.  
+- Re-implemented the chat system.  
+  Please select the desired chat application in the chat settings menu.  
+  Old chat settings won't be used.
+- Re-implemented the notifications system.  
+  - Now queries the API several times if more channels are streaming than one API response can contain.  
+  - Uses Chromium's new freedesktop notification implementation on Linux.
+- Re-implemented application settings.  
+  - Cleaned up the internal settings data structure.
+  - Renamed and reordered settings submenus.
+  - Moved certain settings to different submenus.
+- Re-implemented several other components and modules.
+- Added Vodcast indicators. #478
+- Added desktop shortcut option to the Windows installers. #483
+- Added option to GUI settings to hide window control buttons. #505
+- Fixed some tooltips showing a channel's ID instead of its name.
+- Fixed application not closing correctly sometimes.
+- Fixed infinite scrolling in the search results.
+- Fixed application window focus when clicking a notification. #465
+- Fixed banned channels breaking the infinite scroll mechanism. #466
+- Fixed login issues when using multiple accounts. #474
+- Fixed chat application opening again when restarting a stream. #475
+- Fixed channel page layout with empty descriptions. #498
+- Fixed global menubar preferences hotkey on macOS. #508
+- Upgraded to NW.js 0.26.6 (Chromium 62.0.3202.94 / Node 9.1.0)
+- \[dev] Switched from npm to yarn.
+- \[dev] Added a TODO list.
+
+Since v1.4.0:
+
+- Fixed broken macOS archives. #509
+- Fixed (un)check all languages not working. #510
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.3.1...v1.4.1)
+
+
+## [v1.4.0](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.4.0) (2017-11-19)
+
+- Changed default Streamlink (and Livestreamer) parameters.  
+  Please see the "Player input" option in the "Streaming" settings menu and make sure that your player supports the selected method.  
+- Re-implemented the chat system.  
+  Please select the desired chat application in the chat settings menu.  
+  Old chat settings won't be used.
+- Re-implemented the notifications system.  
+  - Now queries the API several times if more channels are streaming than one API response can contain.  
+  - Uses Chromium's new freedesktop notification implementation on Linux.
+- Re-implemented application settings.  
+  - Cleaned up the internal settings data structure.
+  - Renamed and reordered settings submenus.
+  - Moved certain settings to different submenus.
+- Re-implemented several other components and modules.
+- Added Vodcast indicators. #478
+- Added desktop shortcut option to the Windows installers. #483
+- Added option to GUI settings to hide window control buttons. #505
+- Fixed some tooltips showing a channel's ID instead of its name.
+- Fixed application not closing correctly sometimes.
+- Fixed infinite scrolling in the search results.
+- Fixed application window focus when clicking a notification. #465
+- Fixed banned channels breaking the infinite scroll mechanism. #466
+- Fixed login issues when using multiple accounts. #474
+- Fixed chat application opening again when restarting a stream. #475
+- Fixed channel page layout with empty descriptions. #498
+- Fixed global menubar preferences hotkey on macOS. #508
+- Upgraded to NW.js 0.26.6 (Chromium 62.0.3202.94 / Node 9.1.0)
+- \[dev] Switched from npm to yarn.
+- \[dev] Added a TODO list.
+
+
+[Changelog](https://github.com/streamlink/streamlink-twitch-gui/compare/v1.3.1...v1.4.0)
+
+
 ## [v1.3.1](https://github.com/streamlink/streamlink-twitch-gui/releases/tag/v1.3.1) (2017-05-28)
 
 - Added back explicit quality selections for Streamlink. #454

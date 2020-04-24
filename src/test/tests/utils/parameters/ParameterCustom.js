@@ -1,7 +1,5 @@
-import {
-	module,
-	test
-} from "qunit";
+import { module, test } from "qunit";
+
 import Parameter from "utils/parameters/Parameter";
 import ParameterCustom from "utils/parameters/ParameterCustom";
 
@@ -71,6 +69,39 @@ test( "Custom parameters", function( assert ) {
 		getParameters( obj, [ g ] ),
 		[ "--foo", "\\a\\" ],
 		"Invalid escaping backslashes"
+	);
+
+});
+
+
+test( "Tokenizer", function( assert ) {
+
+	const command = [
+		"foo",
+		"bar baz",
+		"\"foo's bar\"",
+		"'bar \"foo\"'",
+		"baz=bar",
+		"qux \"quux 123\"",
+		"quux=\"qux 456\"",
+		"param=\"value \\\"with quotes\\\"\""
+	].join( " " );
+
+	assert.propEqual(
+		getParameters( { command }, [ new ParameterCustom( null, "command" ) ] ),
+		[
+			"foo",
+			"bar",
+			"baz",
+			"foo's bar",
+			"bar \"foo\"",
+			"baz=bar",
+			"qux",
+			"quux 123",
+			"quux=qux 456",
+			"param=value \"with quotes\""
+		],
+		"Properly tokenizes command line string"
 	);
 
 });

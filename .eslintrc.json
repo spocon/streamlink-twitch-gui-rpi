@@ -3,8 +3,12 @@
 
 	"extends": "eslint:recommended",
 
+	"parser": "babel-eslint",
 	"parserOptions": {
 		"ecmaVersion": 2017,
+		"ecmaFeatures": {
+			"legacyDecorators": true
+		},
 		"sourceType": "module"
 	},
 
@@ -23,7 +27,8 @@
 		"no-empty": "off",
 		"no-mixed-spaces-and-tabs": "off",
 
-		"indent": [ "error", "tab", {
+		"indent": "off",
+		"indent-legacy": [ "error", "tab", {
 			"SwitchCase": 1
 		}],
 		"linebreak-style": [ "error", "unix" ],
@@ -49,6 +54,7 @@
 		"semi": "error",
 		"no-sequences": "error",
 		"no-var": "error",
+		"no-useless-escape": "off",
 		"quotes": [ "error", "double" ],
 		"prefer-template": "error",
 		"comma-style": [ "error", "last" ],

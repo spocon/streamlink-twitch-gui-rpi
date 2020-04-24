@@ -1,9 +1,7 @@
-import {
-	module,
-	test
-} from "qunit";
-import loggerInjector from "inject-loader?-Moment&-utils/node/denodify!utils/Logger";
+import { module, test } from "qunit";
 import { posix as path } from "path";
+
+import loggerInjector from "inject-loader?-Moment&-util!utils/Logger";
 
 
 const mockArgv = argv => ({
@@ -23,10 +21,10 @@ test( "Log levels", assert => {
 	const commonDeps = {
 		"config": { log: {} },
 		"nwjs/process": global.process,
-		"utils/node/platform": { tmpdir() {} },
+		"utils/node/platform": { logdir: "/logs" },
 		"utils/node/fs/mkdirp": () => {},
 		"utils/node/fs/clearfolder": () => {},
-		"path": { resolve() {} },
+		"path": path,
 		"fs": { appendFile() {} }
 	};
 
@@ -163,10 +161,10 @@ test( "Logging to stdout/stderr", async assert => {
 				}
 			}
 		},
-		"utils/node/platform": { tmpdir() {} },
+		"utils/node/platform": { logdir: "/logs" },
 		"utils/node/fs/mkdirp": () => {},
 		"utils/node/fs/clearfolder": () => {},
-		"path": { resolve() {} },
+		"path": path,
 		"fs": { appendFile() {} }
 	};
 
@@ -242,7 +240,6 @@ test( "Logging to file", async assert => {
 	const commonDeps = {
 		"config": {
 			log: {
-				dir: "logs",
 				filename: "[file.log]",
 				maxAgeDays: 1
 			}
@@ -261,26 +258,24 @@ test( "Logging to file", async assert => {
 			}
 		},
 		"utils/node/platform": {
-			tmpdir() {
-				return "/";
-			}
+			logdir: "/logs"
 		},
 		"path": path
 	};
 
 	Logger = loggerInjector( Object.assign({
 		"utils/node/fs/mkdirp": dir => {
-			assert.strictEqual( dir, "/", "Calls mkdirp" );
+			assert.strictEqual( dir, "/logs", "Calls mkdirp" );
 		},
 		"utils/node/fs/clearfolder": ( dir, maxage ) => {
-			assert.strictEqual( dir, "/", "Calls clearfolder with correct path" );
+			assert.strictEqual( dir, "/logs", "Calls clearfolder with correct path" );
 			assert.strictEqual( maxage, 24 * 3600 * 1000, "Calls clearfolder with correct maxage" );
 		},
 		"fs": {
 			appendFile( file, content, callback ) {
 				assert.strictEqual(
 					file,
-					"/file.log",
+					"/logs/file.log",
 					"Writes to the correct log file"
 				);
 				assert.ok(
@@ -365,7 +360,7 @@ test( "Logger class", async assert => {
 				}
 			}
 		},
-		"utils/node/platform": { tmpdir() {} },
+		"utils/node/platform": { logdir: "/logs" },
 		"utils/node/fs/mkdirp": () => {},
 		"utils/node/fs/clearfolder": () => {},
 		"fs": { appendFile() {} },

@@ -1,0 +1,35 @@
+{
+	"default": "en",
+	"locales": {
+		"de": "Deutsch",
+		"en": "English",
+		"fr": "Français",
+		"zh-tw": "中文 繁體"
+	},
+	"contributors": {
+		"de": [
+			{
+				"name": "Sebastian Meyer",
+				"github": "bastimeyer"
+			}
+		],
+		"en": [
+			{
+				"name": "Sebastian Meyer",
+				"github": "bastimeyer"
+			}
+		],
+		"fr": [
+			{
+				"name": "Simon P.",
+				"github": "selbiselbi"
+			}
+		],
+		"zh-tw":[
+			{
+				"name": "Dxball",
+				"github": "dxball"
+			}
+		]
+	}
+}

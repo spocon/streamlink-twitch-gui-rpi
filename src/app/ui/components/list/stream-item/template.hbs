@@ -1,0 +1,43 @@
+<header>
+{{#if channel.hasLanguage}}{{flag-icon type="channel" lang=channel.language}}{{/if}}
+<span class="{{unless channel.hasLanguage 'noL'}} {{unless channel.hasBroadcasterLanguage 'noBL'}}">{{#link-to "channel" channel.id}}{{channel.detailedName}}{{/link-to}}</span>
+{{#if channel.hasBroadcasterLanguage}}{{flag-icon type="broadcaster" lang=channel.broadcaster_language}}{{/if}}
+</header>
+{{#stream-preview-image
+	src=content.preview.medium
+	stream=content
+	channel=content.channel
+	clickable=(bool-not expanded)
+	tagName="section"
+	class=(if expanded "expanded")
+	title=(unless expanded (unless infoTitle (if channel.status channel.status "") (if channel.game channel.game "")) "")
+	action=(action "collapse")
+}}
+<footer class="{{if (bool-or infoTitle showGame) 'shaded'}} {{if expanded 'expanded'}} {{if locked 'locked'}}">
+<div class="bottom {{unless (bool-or infoTitle showGame) 'hidden'}}">
+<div class="info-game">{{#if channel.game}}<i class="fa fa-gamepad"></i>{{#link-to "games.game" channel.game title=channel.game}}{{channel.game}}{{/link-to}}{{/if}}</div>
+<div class="info-title"><i></i><span>{{channel.status}}</span></div>
+</div>
+<div class="details">
+<div>
+{{#if content.hasFormatInfo}}
+<div class="stats">
+<div class="resolution"><i class="fa fa-film"></i> {{content.resolution}}</div>
+<div class="fps">{{t "components.stream-item.fps" fps=content.fps}} <i class="fa fa-eye"></i></div>
+</div>
+{{/if}}
+<div class="status">
+{{embedded-links text=channel.status}}
+</div>
+</div>
+</div>
+</footer>
+<div class="btn-expand" title="{{t (concat 'components.stream-item.details.' (unless expanded 'show' (if locked 'unlock' 'lock')))}}" {{action "expand" bubbles=false}}>
+<i class="fa {{unless expanded 'fa-chevron-up' (if locked 'fa-lock' 'fa-unlock-alt')}}"></i>
+</div>
+{{/stream-preview-image}}
+<footer>
+<span title="{{content.titleCreatedAt}}"><i class="fa fa-clock-o"></i> {{hours-from-now content.created_at interval=60000}}</span>
+{{#if content.isVodcast}}<span class="vodcast-indicator" title="{{t 'components.stream-item.vodcast'}}"><i class="fa fa-recycle"></i></span>{{/if}}
+<span title="{{content.titleViewers}}">{{format-viewers content.viewers}} <i class="fa fa-users"></i></span>
+</footer>

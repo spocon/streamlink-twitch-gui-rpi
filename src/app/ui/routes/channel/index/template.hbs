@@ -1,0 +1,51 @@
+<section class="content-channel-overview">
+<div class="big-image {{if stream 'online'}}">
+{{stream-preview-image
+	stream=stream
+	channel=channel
+	clickable=stream
+	src=(if stream stream.preview.large channel.video_banner)
+	contextmenuNoGotos=true
+}}
+</div>
+<div class="info">
+<h3>{{t "routes.channel.details.header"}}</h3>
+<dl class="dl-horizontal">
+{{#if channel.hasCustomDisplayName}}
+<dt><i class="fa fa-user"></i>{{t "routes.channel.details.name.title"}}</dt>
+<dd>{{channel.name}}</dd>
+{{/if}}
+<dt><i class="fa fa-calendar"></i>{{t "routes.channel.details.created-at.title"}}</dt>
+<dd>{{format-time channel.created_at (t "routes.channel.details.created-at.format")}}</dd>
+{{#if channel.hasBroadcasterLanguage}}
+<dt><i class="fa fa-language"></i>{{t "routes.channel.details.language.title"}}</dt>
+<dd>{{flag-icon type="broadcaster" lang=channel.broadcaster_language}} {{language}}</dd>
+{{/if}}
+<dt><i class="fa fa-heart"></i>{{t "routes.channel.details.followers.title"}}</dt>
+<dd title="{{channel.titleFollowers}}">{{t "routes.channel.details.followers.data" followers=(format-viewers channel.followers) day=(format-viewers (math-div channel.followers age))}}</dd>
+<dt><i class="fa fa-line-chart"></i>{{t "routes.channel.details.views.title"}}</dt>
+<dd title="{{channel.titleViews}}">{{t "routes.channel.details.views.data" views=(format-viewers channel.views) day=(format-viewers (math-div channel.views age))}}</dd>
+<dt><i class="fa fa-male"></i>{{t "routes.channel.details.content.title"}}</dt>
+<dd>{{t (concat "routes.channel.details.content." (if channel.mature "mature" "ffa"))}}</dd>
+{{#if stream.hasFormatInfo}}
+<dt><i class="fa fa-film"></i>{{t "routes.channel.details.format.title"}}</dt>
+<dd>{{t "routes.channel.details.format.data" resolution=stream.resolution fps=stream.fps}}</dd>
+{{/if}}
+{{#if stream}}
+<dt><i class="fa fa-history"></i>{{t "routes.channel.details.delay.title"}}</dt>
+<dd>{{#if (is-equal stream.delay 0)}}{{t "routes.channel.details.delay.data.zero"}}{{else}}{{t "routes.channel.details.delay.data" count=stream.delay}}{{/if}}</dd>
+{{/if}}
+{{#if stream.isVodcast}}
+<dt><i class="fa fa-recycle"></i>{{t "routes.channel.details.vodcast.title"}}</dt>
+<dd>{{t "routes.channel.details.vodcast.data"}}</dd>
+{{/if}}
+</dl>
+<div class="button-list-horizontal">
+{{open-chat channel=channel}}
+{{twitch-emotes channel=channel showButton=true}}
+{{share-channel channel=channel}}
+{{subscribe-channel channel=channel}}
+{{follow-channel channel=channel}}
+</div>
+</div>
+</section>

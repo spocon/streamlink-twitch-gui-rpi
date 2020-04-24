@@ -1,12 +1,11 @@
-import "shim";
-import { Application } from "ember";
-
-import "initializers";
-import modules from "./app-modules";
+import Application from "@ember/application";
+import Router from "./router";
+import app from "ember-app";
 
 
-export default Application.create( modules, {
-	rootElement: document.documentElement,
+export default Application.create( app, {
+	rootElement: "body",
+	Router,
 
 	toString() { return "App"; }
 });

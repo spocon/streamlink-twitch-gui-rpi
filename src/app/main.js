@@ -1,3 +1,6 @@
+// special NW.js package.json import (see webpack config)
+import "./package.json";
+
 
 global.process.removeAllListeners();
 
@@ -25,5 +28,15 @@ global.process.on( "uncaughtException", function( err ) {
 });
 
 
-require( "styles/app" );
+// "pre-load" certain native node modules
+// prevents a bug on Windows which causes all methods of stream.Writable.prototype to be missing
+// on stream.Duplex.prototype, more specifically stream.Duplex.prototype.cork. Also related to
+// all classes which extend stream.Duplex, like net.Socket.
+// See https://github.com/streamlink/streamlink-twitch-gui/issues/628#issuecomment-481510654
+require( "stream" );
+require( "net" );
+
+
+require( "ember" );
+require( "./logger" );
 require( "./app" );

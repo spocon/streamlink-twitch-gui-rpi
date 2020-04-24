@@ -1,18 +1,22 @@
-import "shim";
-import QUnit, {
-	config
-} from "qunit";
-import "ember-test";
-import "bower/qunit/qunit/qunit.css";
-import "bower/ember/ember-template-compiler";
+// special NW.js package.json import (see webpack config)
+import "./package.json";
+
+import { default as QUnit, config } from "qunit";
+import "qunit/assertion-helpers";
+// TODO: fix import paths
+import "./web_modules/ember-test";
 
 
 // don't start automatically
 config.autostart = false;
+// check for pollution of the global scope (window)
+config.noglobals = true;
+// hide passed tests
+config.hidepassed = true;
 
 
 // load tests and then start
-require( [ "tests/tests" ], function() {
+require( [ "tests" ], /* istanbul ignore next */ function() {
 	if ( global._noQUnitBridge ) { return; }
 	if ( global._setupQUnitBridge ) {
 		// bridge injected, set it up and start QUnit

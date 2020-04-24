@@ -25,6 +25,10 @@ module.exports = {
 		"<%= dir.tmp_test %>/**",
 		"!<%= dir.tmp_test %>"
 	],
+	tmp_coverage: [
+		"<%= dir.tmp_coverage %>/**",
+		"!<%= dir.tmp_coverage %>"
+	],
 
 	cache: [
 		"<%= dir.cache %>/**",
@@ -42,6 +46,6 @@ module.exports = {
 	release_linux64: [ "<%= dir.releases %>/<%= package.name %>/linux64/**" ],
 	release_linuxarm64: [ "<%= dir.releases %>/<%= package.name %>/linuxarm64/**" ],
 
-	win32installer: [ "<%= dir.tmp_installer %>/win32installer/**" ],
-	win64installer: [ "<%= dir.tmp_installer %>/win64installer/**" ]
+	installer_win32: [ "<%= dir.tmp_installer %>/win32installer/**" ],
+	installer_win64: [ "<%= dir.tmp_installer %>/win64installer/**" ]
 };

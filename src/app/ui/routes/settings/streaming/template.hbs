@@ -1,0 +1,165 @@
+<fieldset>
+{{#settings-row
+	(t "settings.streaming.provider.title")
+	(t "settings.streaming.provider.description")
+	icon="fa-cog"
+	notes=(t "settings.streaming.provider.notes")
+	requires=(if
+		(get (get providers model.streaming.provider) "python")
+		(concat "Python " (get (get providers model.streaming.provider) "python"))
+	)
+}}
+	{{drop-down
+		value=model.streaming.provider
+		content=contentStreamingProvider
+		class="streaming-providers-dropdown"
+	}}
+	{{#each-in providers as |key provider|}}
+		<dl class="streaming-providers-list {{unless (is-equal key model.streaming.provider) 'hidden'}}">
+			<dt>
+				{{#if provider.python}}
+					{{t "settings.streaming.provider.executable.python"}}
+				{{else}}
+					{{t (concat "settings.streaming.provider.executable." key)}}
+				{{/if}}
+			</dt>
+			<dd>
+				{{file-select
+					value=(mut (get (get model.streaming.providers key) "exec"))
+					placeholder=(get provider.exec platform)
+					inputClass="form-control"
+				}}
+			</dd>
+			{{#if provider.python}}
+				<dt>
+					{{t (concat "settings.streaming.provider.python-script." key)}}
+				</dt>
+				<dd>
+					{{file-select
+						value=(mut (get (get model.streaming.providers key) "pythonscript"))
+						placeholder=(get provider.pythonscript platform)
+						inputClass="form-control"
+					}}
+				</dd>
+			{{/if}}
+			{{#if model.advanced}}
+				<dt>
+					{{t "settings.streaming.provider.parameters.title"}}
+				</dt>
+				<dd>
+					{{input
+						type="text"
+						value=(mut (get (get model.streaming.providers key) "params"))
+						classNames="col-xs-12"
+						placeholder=(t "settings.streaming.provider.parameters.placeholder")
+					}}
+				</dd>
+			{{/if}}
+		</dl>
+	{{/each-in}}
+{{/settings-row}}
+
+{{#settings-row
+	(t "settings.streaming.playerinput.title")
+	(t "settings.streaming.playerinput.description")
+	icon="fa-file-video-o"
+	notes=(t "settings.streaming.playerinput.notes")
+	documentation=playerInputDocumentation
+}}
+	{{#radio-buttons
+		value=model.streaming.player_input
+		content=contentStreamingPlayerInput
+		as |item|
+	}}
+		<div class="input-btn-with-description">
+			{{item.button label=(t (concat "settings.streaming.playerinput.values." item.value ".label"))}}
+			<p class="description">{{t (concat "settings.streaming.playerinput.values." item.value ".description")}}</p>
+		</div>
+	{{/radio-buttons}}
+{{/settings-row}}
+</fieldset>
+
+<fieldset>
+{{#settings-row
+	(t "settings.streaming.hls-live-edge.title")
+	(t "settings.streaming.hls-live-edge.description")
+	icon="fa-bolt"
+	documentation="--hls-live-edge"
+}}
+	{{number-field
+		value=model.streaming.hls_live_edge
+		defaultValue=hlsLiveEdgeDefault
+		min=hlsLiveEdgeMin
+		max=hlsLiveEdgeMax
+		disabled=playerInputPassthrough
+	}}
+{{/settings-row}}
+
+{{#settings-row
+	(t "settings.streaming.hls-segment-threads.title")
+	(t "settings.streaming.hls-segment-threads.description")
+	icon="fa-sort-amount-asc"
+	documentation="--hls-segment-threads"
+}}
+	{{number-field
+		value=model.streaming.hls_segment_threads
+		defaultValue=hlsSegmentThreadsDefault
+		min=hlsSegmentThreadsMin
+		max=hlsSegmentThreadsMax
+		disabled=playerInputPassthrough
+	}}
+{{/settings-row}}
+
+{{#settings-row
+	(t "settings.streaming.player-no-close.title")
+	(t "settings.streaming.player-no-close.description")
+	icon="fa-caret-square-o-right"
+	notes=(t "settings.streaming.player-no-close.notes" provider=providerName)
+	documentation="--player-no-close"
+}}
+	{{check-box
+		(t "settings.streaming.player-no-close.checkbox")
+		checked=model.streaming.player_no_close
+	}}
+{{/settings-row}}
+
+{{#settings-row
+	(t "settings.streaming.disable-ads.title")
+	(t "settings.streaming.disable-ads.description")
+	icon="fa-money"
+	documentation="--twitch-disable-ads"
+}}
+	{{check-box
+		(t "settings.streaming.disable-ads.checkbox")
+		checked=model.streaming.disable_ads
+	}}
+{{/settings-row}}
+
+{{#settings-row
+	(t "settings.streaming.retry-open.title")
+	(t "settings.streaming.retry-open.description")
+	icon="fa-rocket"
+	documentation="--retry-open"
+}}
+	{{number-field
+		value=model.streaming.retry_open
+		defaultValue=retryOpenDefault
+		min=retryOpenMin
+		max=retryOpenMax
+	}}
+{{/settings-row}}
+
+{{#settings-row
+	(t "settings.streaming.retry-streams.title")
+	(t "settings.streaming.retry-streams.description")
+	icon="fa-hourglass-half"
+	documentation="--retry-streams"
+}}
+	{{number-field
+		value=model.streaming.retry_streams
+		defaultValue=retryStreamsDefault
+		min=retryStreamsMin
+		max=retryStreamsMax
+	}}
+{{/settings-row}}
+</fieldset>

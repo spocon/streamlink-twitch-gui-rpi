@@ -19,7 +19,7 @@ module.exports = function( grunt ) {
 		/** @type {String[]} target */
 		const targets = ( !this.args.length
 			// default target is an archive for the current platform
-			? [ `${platforms.getPlatforms()}archive` ]
+			? [ `archive_${platforms.getPlatforms()}` ]
 			: this.args
 		)
 			.reduce( ( list, target ) => {
@@ -91,9 +91,7 @@ module.exports = function( grunt ) {
 		// read changelog
 		getReleaseChangelog( { changelogFile: changelogFile }, grunt.config.get( "package" ) )
 			.then( data => {
-				grunt.config.set( "releases", {
-					changelog: data
-				});
+				grunt.config.set( "template.releases.options.data.changelog", data );
 				tasks.push( "template:releases" );
 			})
 			.then( () => {

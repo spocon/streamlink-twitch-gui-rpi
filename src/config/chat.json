@@ -1,12 +1,22 @@
 {
+	"browser": {
+		"attributes": [
+			{
+				"name": "url",
+				"icon": "fa-link",
+				"type": "string",
+				"isUrl": true,
+				"defaultValue": "default"
+			}
+		]
+	},
 	"chromium": {
-		"args": "\"--app={url}\"",
 		"exec": {
 			"win32": "chrome.exe",
 			"darwin": "Chromium",
 			"linux": [
-				"chromium-browser",
 				"chromium",
+				"chromium-browser",
 				"chromium-dev",
 				"chromium-continuous-bin",
 				"chromium-snapshot-bin"
@@ -26,10 +36,30 @@
 				"/usr/local/bin",
 				"/opt/chromium"
 			]
-		}
+		},
+		"attributes": [
+			{
+				"name": "exec",
+				"icon": "fa-cog",
+				"type": "string",
+				"isFile": true
+			},
+			{
+				"name": "args",
+				"icon": "fa-terminal",
+				"type": "string",
+				"isArgs": true
+			},
+			{
+				"name": "url",
+				"icon": "fa-link",
+				"type": "string",
+				"isUrl": true,
+				"defaultValue": "default"
+			}
+		]
 	},
 	"chrome": {
-		"args": "\"--app={url}\"",
 		"exec": {
 			"win32": "chrome.exe",
 			"darwin": "Google Chrome",
@@ -56,18 +86,57 @@
 				"/opt/google/chrome",
 				"/opt/google/chrome-unstable"
 			]
-		}
+		},
+		"attributes": [
+			{
+				"name": "exec",
+				"icon": "fa-cog",
+				"type": "string",
+				"isFile": true
+			},
+			{
+				"name": "args",
+				"icon": "fa-terminal",
+				"type": "string",
+				"isArgs": true
+			},
+			{
+				"name": "url",
+				"icon": "fa-link",
+				"type": "string",
+				"isUrl": true,
+				"defaultValue": "default"
+			}
+		]
 	},
 	"msie": {
-		"args": "\"{script}\" \"{url}\"",
-		"exec": "cscript.exe",
-		"script": "msie-minimal.vbs"
+		"exec": {
+			"win32": "cscript.exe",
+			"darwin": false,
+			"linux": false
+		},
+		"fallback": {
+			"win32": [
+				"%WINDIR%\\SysWOW64",
+				"%WINDIR%\\system32"
+			],
+			"darwin": false,
+			"linux": false
+		},
+		"data": {
+			"script": "msie-minimal.vbs"
+		},
+		"attributes": [
+			{
+				"name": "url",
+				"icon": "fa-link",
+				"type": "string",
+				"isUrl": true,
+				"defaultValue": "default"
+			}
+		]
 	},
 	"chatty": {
-		"chatty-args": "-connect -single -user \"{user}\" -token \"{token}\" -channel \"{channel}\"",
-		"chatty-args-noauth": "-connect -single -channel \"{channel}\"",
-		"chatty-script": "chatty",
-		"args": "-jar \"{jar}\"",
 		"exec": {
 			"win32": "javaw.exe",
 			"darwin": "java",
@@ -90,6 +159,122 @@
 				"/usr/bin",
 				"/etc/alternatives"
 			]
-		}
+		},
+		"jar": {
+			"win32": [
+				"Chatty.jar",
+				"chatty.jar"
+			],
+			"darwin": [
+				"Chatty.jar",
+				"chatty.jar"
+			],
+			"linux": [
+				"Chatty.jar",
+				"chatty.jar"
+			]
+		},
+		"jarfallback": {
+			"win32": false,
+			"darwin": [
+				"/Applications/Chatty"
+			],
+			"linux": [
+				"/usr/share/chatty"
+			]
+		},
+		"attributes": [
+			{
+				"name": "exec",
+				"icon": "fa-cog",
+				"type": "string",
+				"isFile": true
+			},
+			{
+				"name": "jar",
+				"icon": "fa-cog",
+				"type": "string",
+				"isFile": true
+			},
+			{
+				"name": "instance",
+				"icon": "fa-clone",
+				"type": "boolean",
+				"defaultValue": true
+			},
+			{
+				"name": "auth",
+				"icon": "fa-sign-in",
+				"type": "boolean",
+				"defaultValue": true
+			},
+			{
+				"name": "args",
+				"icon": "fa-terminal",
+				"type": "string",
+				"isArgs": true
+			}
+		]
+	},
+	"chatty-standalone": {
+		"exec": {
+			"win32": "Chatty.exe",
+			"darwin": false,
+			"linux": false
+		},
+		"fallback": {
+			"win32": [],
+			"darwin": false,
+			"linux": false
+		},
+		"attributes": [
+			{
+				"name": "exec",
+				"icon": "fa-cog",
+				"type": "string",
+				"isFile": true
+			},
+			{
+				"name": "instance",
+				"icon": "fa-clone",
+				"type": "boolean",
+				"defaultValue": true
+			},
+			{
+				"name": "auth",
+				"icon": "fa-sign-in",
+				"type": "boolean",
+				"defaultValue": true
+			},
+			{
+				"name": "args",
+				"icon": "fa-terminal",
+				"type": "string",
+				"isArgs": true
+			}
+		]
+	},
+	"custom": {
+		"attributes": [
+			{
+				"name": "exec",
+				"icon": "fa-cog",
+				"type": "string",
+				"isFile": true
+			},
+			{
+				"name": "args",
+				"icon": "fa-terminal",
+				"type": "string",
+				"isArgs": true
+			},
+			{
+				"name": "url",
+				"icon": "fa-link",
+				"type": "string",
+				"isUrl": true,
+				"defaultValue": "default"
+			}
+		]
 	}
 }

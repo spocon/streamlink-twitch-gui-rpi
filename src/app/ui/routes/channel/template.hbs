@@ -1,0 +1,31 @@
+<main class="content content-channel">
+<header>
+<div class="logo">
+{{preview-image src=channel.logo title=channel.display_name}}
+</div>
+<div class="info">
+<h3 class="title">
+{{#if channel.hasLanguage}}{{flag-icon type="channel" lang=channel.language}}{{/if}}
+<span>{{channel.display_name}}</span>
+</h3>
+{{#if stream}}
+<div class="stats online">
+<span title="{{stream.titleCreatedAt}}"><i class="fa fa-clock-o"></i> {{hours-from-now stream.created_at interval=60000}}</span>
+<span title="{{stream.titleViewers}}"><i class="fa fa-users"></i> {{format-viewers stream.viewers}}</span>
+{{#if stream.game}}<span><i class="fa fa-gamepad"></i> {{#link-to "games.game" stream.game}}{{stream.game}}{{/link-to}}</span>{{/if}}
+</div>
+{{else}}
+<div class="stats offline"><i class="fa fa-bed"></i> {{t "routes.channel.offline"}}</div>
+{{/if}}
+{{embedded-links text=channel.status classNames="status"}}
+</div>
+</header>
+{{#sub-menu "channel" (hash
+	index=(t "routes.channel.menu.details")
+	teams=(t "routes.channel.menu.teams")
+	settings=(t "routes.channel.menu.settings")
+) as |subroute name|}}
+	{{#link-to (concat "channel." subroute) model tagName="li"}}{{name}}{{/link-to}}
+{{/sub-menu}}
+{{outlet}}
+</main>
